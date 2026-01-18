@@ -89,7 +89,7 @@ export const addCustomer = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "Customer added successfully",
+      message: "Customer added successfully, image loding...",
       customer: newCustomer,
     });
   } catch (error) {

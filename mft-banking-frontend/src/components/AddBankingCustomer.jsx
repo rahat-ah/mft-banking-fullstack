@@ -322,11 +322,6 @@ export default function AddBankingCustomer() {
                 value={values.earlierDueAmount}
               />
             </div>
-            {errors.loanAmount && touched.loanAmount && (
-              <div className="text-red-500 text-sm mt-1 lowercase">
-                {errors.loanAmount}
-              </div>
-            )}
           </div>
 
           {/* Status */}

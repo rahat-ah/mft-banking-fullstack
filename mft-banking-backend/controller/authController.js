@@ -69,6 +69,12 @@ export const signUp = async (req, res) => {
       sameSite:process.env.APP_ENVIRONMENT === "production" ? "none" : "lax",
       maxAge: 60 * 60 * 1000,
     });
+    
+    res.status(200).json({
+      success: true,
+      message: "sign up succesfully!",
+    });
+    
     // SEND SIGN UP EMAIL TO USER
     await transporter.sendMail({
       from: `"The author of mern auth" <${process.env.BREVO_SENDER_EMAIL}>`,
@@ -76,12 +82,9 @@ export const signUp = async (req, res) => {
       subject: "welcome to rahats mern auth ✔",
       text: "You are very welcome here",
       html: sendSignupMailHtml(fullName),
-    });
-    console.log("message sent!!!!");
-    return res.status(200).json({
-      success: true,
-      message: "sign up succesfully!",
-    });
+    }).catch(err => console.log("Email send failed:", err));
+    
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -127,18 +130,20 @@ export const sendVerifyOtp = async (req, res) => {
 
     await admin.save();
 
+    res.json({
+      success: true,
+      message: "send verify otp succesfully!",
+    });
+
     await transporter.sendMail({
       from: `"The author of MFT" <${process.env.BREVO_SENDER_EMAIL}>`,
       to: email,
       subject: "thanks from MFT||Banking",
       text: "verify with otp",
       html: sendOtpMailHtml( otp, "Verify Otp", "3"),
-    });
+    }).catch(err => console.log("Otp sms send failed:", err));
     
-    res.json({
-      success: true,
-      message: "send verify otp succesfully!",
-    });
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -297,15 +302,7 @@ export const logout = async (req, res) => {
       message: "user not found!",
     });
     }
-    //SEND LOGOUT MAIL
-    await transporter.sendMail({
-      from: `"The author of MFT" <${process.env.BREVO_SENDER_EMAIL}>`,
-      to: user.email,
-      subject: "thanks from MFT Banking ✔",
-      text: "come again leter please",
-      html: sendLogoutMailHtml(user.role),
-    });
-   
+    
     res.clearCookie("token", {
       httpOnly: true,
       secure: process.env.APP_ENVIRONMENT === "production",
@@ -316,6 +313,15 @@ export const logout = async (req, res) => {
       success: true,
       message: "log out succesfully!",
     });
+
+    //SEND LOGOUT MAIL
+    await transporter.sendMail({
+      from: `"The author of MFT" <${process.env.BREVO_SENDER_EMAIL}>`,
+      to: user.email,
+      subject: "thanks from MFT Banking ✔",
+      text: "come again leter please",
+      html: sendLogoutMailHtml(user.role),
+    }).catch(err => console.log("Email send failed:", err));
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -433,18 +439,19 @@ export const adminSignin = async (req, res) => {
         process.env.APP_ENVIRONMENT === "production" ? "none" : "lax",
       maxAge: 30 * 60 * 1000,
     });
-
+    res.status(200).json({
+      success: true,
+      message: "log in succesfully!",
+    });
+    //send welcome email
     await transporter.sendMail({
       from: `"The author of MFT" <${process.env.BREVO_SENDER_EMAIL}>`,
       to: admin.profile.email,
       subject: "welcome to MFT || Banking ✔",
       text: "You are very welcome here",
       html: sendSigninMailHtml(admin.profile.fullName),
-    });
-    return res.status(200).json({
-      success: true,
-      message: "log in succesfully!",
-    });
+    }).catch(err => console.log("Email send failed:", err));
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({
