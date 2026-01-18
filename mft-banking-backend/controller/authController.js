@@ -257,17 +257,20 @@ export const signin = async (req, res) => {
         process.env.APP_ENVIRONMENT === "production" ? "none" : "lax",
       maxAge: 60 * 60 * 1000,
     });
-    await transporter.sendMail({
+    res.status(200).json({
+      success: true,
+      message: "log in succesfully!",
+    });
+
+    // then send email asynchronously
+    transporter.sendMail({
       from: `"The author of MFT" <${process.env.BREVO_SENDER_EMAIL}>`,
       to: user.email,
       subject: "welcome to MFT || Banking ✔",
       text: "You are very welcome here",
       html: sendSigninMailHtml(user.fullName),
-    });
-    return res.status(200).json({
-      success: true,
-      message: "log in succesfully!",
-    });
+    }).catch(err => console.log("Email send failed:", err));
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({
