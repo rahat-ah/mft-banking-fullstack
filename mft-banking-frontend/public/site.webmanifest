@@ -1,0 +1,1 @@
+{ "name": "MFT Banking", "short_name": "MFT", "icons": [ { "src": "/mftLogo.png", "sizes": "192x192", "type": "image/png" }, { "src": "/mftLogo.png", "sizes": "512x512", "type": "image/png" } ], "start_url": "/", "display": "standalone", "theme_color": "#1E40AF", "background_color": "#F97316" }
