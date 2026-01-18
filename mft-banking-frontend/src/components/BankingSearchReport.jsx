@@ -3,8 +3,6 @@ import axios from "axios";
 import SubmitLoder from "../utils/SubmitLoder";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useContext } from "react";
-import { UserContext } from "../contextApi/userContext";
 
 const statusStyle = {
   paid: {
@@ -45,7 +43,7 @@ export default function BankingSearchReport() {
   const [activeSection, setActiveSection] = useState("ALL");
   const [notes, setNotes] = useState({});
   const [activeNoteId, setActiveNoteId] = useState(null);
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
 
   const navigate = useNavigate();

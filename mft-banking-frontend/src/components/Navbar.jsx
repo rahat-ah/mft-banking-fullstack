@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { FaBars, FaTimes, FaHome, FaUsers, FaPlusCircle } from "react-icons/fa";
 import { IoMdPerson } from "react-icons/io";
-import { RiLoginBoxFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contextApi/userContext";
 import { NavLink } from "react-router-dom";
@@ -11,8 +10,9 @@ import axios from "axios";
 import logoImage from "../assets/mftLogo.png"
 
 export default function Navbar() {
-  const { hamMenuOpen, setHamMenuOpen, loginFormOpen, setLoginFormOpen,backendUrl } =
+  const { hamMenuOpen, setHamMenuOpen, loginFormOpen, setLoginFormOpen } =
     useContext(UserContext);
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
   const { isAuth, officerId } = useContext(AuthContext);
   const [officer, setOfficer] = useState({});
   const navigate = useNavigate();

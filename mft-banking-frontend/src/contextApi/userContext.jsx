@@ -36,7 +36,6 @@ const UserProvider = ({ children }) => {
     getAllCustomers,
     customerDataBySearch,setCustomerDataBySearch,
     isAuthenticated,setIsAuthenticated,
-    backendUrl
   }
   
   return (

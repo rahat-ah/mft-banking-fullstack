@@ -15,7 +15,7 @@ export default function BankingRegister() {
   const [showVerifyButton, setShowVerifyButton] = useState(false);
   const [verifyingEmail, setVerifyingEmail] = useState(false);
   const [showOtpPopup,setShowOtpPopup] = useState(false)
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
   useEffect(()=>{
     setLoginFormOpen(true)

@@ -13,7 +13,8 @@ export default function Home() {
   const [totalCurrentMonthDue,setTotalCurrentMonthDue] = useState(0)
   const [totalCurrentMonthCollection,setTotalCurrentMonthCollection] = useState(0)
   const [bankingCollectionTarget,setBankingCollectionTarget] = useState(0)
-  const {getAllCustomers,backendUrl} = useContext(UserContext)
+  const {getAllCustomers} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
   const navigate = useNavigate()
   
   useEffect(()=>{

@@ -1,13 +1,12 @@
 import axios from "axios";
-import { useContext } from "react";
-import { UserContext } from "../contextApi/userContext";
 
 export const uploadImage = async (file) => {
   if (!file) {
     return null
   }
   try {
-    const {backendUrl}=useContext(UserContext);
+    const backendUrl ='https://mft-banking-fullstack.onrender.com';
+    
     const signatureResponse = await axios.get(
       backendUrl + "/user/cloudinary-signature"
     );

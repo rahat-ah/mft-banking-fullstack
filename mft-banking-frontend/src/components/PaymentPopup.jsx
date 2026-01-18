@@ -4,9 +4,6 @@ import { paymentValidationSchema } from "../schemas/validationSchema";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SubmitLoder from "../utils/SubmitLoder";
-import { useContext } from "react";
-import { UserContext } from "../contextApi/userContext";
-
 function PaymentPopup({
   isOpen,
   onClose,
@@ -30,7 +27,7 @@ function PaymentPopup({
       validationSchema: paymentValidationSchema,
     });
   const [loding,setLoding] = useState(false)
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
   const customHandleSubmit = async (values) => {
     try {

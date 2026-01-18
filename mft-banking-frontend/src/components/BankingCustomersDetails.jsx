@@ -18,8 +18,6 @@ import {
 } from "../utils/getTotalAmount";
 import { toast } from "react-toastify";
 import SubmitLoder from "../utils/SubmitLoder";
-import { useContext } from "react";
-import { UserContext } from "../contextApi/userContext";
 
 export default function BankingCustomersDetails() {
   const { id } = useParams();
@@ -27,7 +25,7 @@ export default function BankingCustomersDetails() {
   const [customerData, setCustomerData] = useState({});
   const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
   const [loading,setLoading] = useState(false);
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
   const handlePaymentSuccess = (updatedCustomer) => {
     setCustomerData(updatedCustomer);

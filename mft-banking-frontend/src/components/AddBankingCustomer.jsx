@@ -15,13 +15,11 @@ import { toast } from "react-toastify";
 import { validationSchema } from "../schemas/validationSchema";
 import { uploadImage } from "../utils/cloudinary-image";
 import SubmitLoder from "../utils/SubmitLoder";
-import { useContext } from "react";
-import { UserContext } from "../contextApi/userContext";
 
 export default function AddBankingCustomer() {
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
   const {
     handleChange,
     handleBlur,

@@ -4,15 +4,12 @@ import axios from "axios";
 import profilePicMaker from "../utils/profilePicMaker";
 import {StepForward } from "lucide-react";
 import {toast} from "react-toastify"
-import { useContext } from "react";
-import { UserContext } from "../contextApi/userContext";
-
 export default function BankingOfficerDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [officer, setOfficer] = useState({});
   const [loading, setLoading] = useState(true);
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
   useEffect(() => {
     const fetchOfficer = async () => {

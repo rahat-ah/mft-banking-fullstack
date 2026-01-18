@@ -5,7 +5,8 @@ import { UserContext } from "../contextApi/userContext";
 
 function CustomerSearchBar() {
   const [lastSearchDetails, setLastSearchDetails] = useState(null);
-  const { customerDataBySearch,setCustomerDataBySearch,backendUrl } = useContext(UserContext);
+  const { customerDataBySearch,setCustomerDataBySearch } = useContext(UserContext);
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
   const {
     handleBlur,
     handleSubmit,

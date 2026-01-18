@@ -9,7 +9,7 @@ export default function VerifyOtpPopup({ email, onClose , setIsEmailVerified }) 
   const [otp, setOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(180); // 3 minutes in seconds
   const [verifying, setVerifying] = useState(false);
-  const {backedUrl} = useContext(UserContext);
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
   // Countdown timer
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function VerifyOtpPopup({ email, onClose , setIsEmailVerified }) 
     }
     setVerifying(true);
     try {
-      const response = await axios.post(`${backedUrl}/auth/verify-otp`,{email,givenOtp:otp});
+      const response = await axios.post(`${backendUrl}/auth/verify-otp`,{email,givenOtp:otp});
       
       if(!response.data.success){
         setIsEmailVerified(false);

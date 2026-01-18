@@ -15,7 +15,7 @@ export default function LoginPage() {
   const {setIsAuth} = useContext(AuthContext)
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {backendUrl} = useContext(UserContext)
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
 
 
   useEffect(() => {
