@@ -13,7 +13,7 @@ export default function Home() {
   const [totalCurrentMonthDue,setTotalCurrentMonthDue] = useState(0)
   const [totalCurrentMonthCollection,setTotalCurrentMonthCollection] = useState(0)
   const [bankingCollectionTarget,setBankingCollectionTarget] = useState(0)
-  const {getAllCustomers} = useContext(UserContext)
+  const {getAllCustomers,backendUrl} = useContext(UserContext)
   const navigate = useNavigate()
   
   useEffect(()=>{
@@ -36,7 +36,7 @@ export default function Home() {
 
     const getBankingCollectionTarget = async()=>{
       try {
-        const bankingCollectionTarget = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/get-banking-collection-target`,{
+        const bankingCollectionTarget = await axios.get(`${backendUrl}/user/get-banking-collection-target`,{
         withCredentials:true});
         
         setBankingCollectionTarget( Number(bankingCollectionTarget.data.bankingTarget))                     

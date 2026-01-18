@@ -51,7 +51,7 @@ export default function LandingPage() {
 
           <div className="lg:w-1/2">
             <img
-              src="https://cdn.pixabay.com/photo/2017/08/30/07/56/money-2696229_1280.jpg"
+              src="https://res.cloudinary.com/dznypggdx/image/upload/v1768719148/file_00000000696871fdb65d200119b9597d_o9rinv.png"
               alt="Banking Illustration"
               className="rounded-2xl shadow-xl"
             />

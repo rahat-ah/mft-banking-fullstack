@@ -11,7 +11,7 @@ import axios from "axios";
 import logoImage from "../assets/mftLogo.png"
 
 export default function Navbar() {
-  const { hamMenuOpen, setHamMenuOpen, loginFormOpen, setLoginFormOpen } =
+  const { hamMenuOpen, setHamMenuOpen, loginFormOpen, setLoginFormOpen,backendUrl } =
     useContext(UserContext);
   const { isAuth, officerId } = useContext(AuthContext);
   const [officer, setOfficer] = useState({});
@@ -24,7 +24,7 @@ export default function Navbar() {
       try {
         const res = await axios.get(
           `${
-            import.meta.env.VITE_BACKEND_URL
+            backendUrl
           }/auth/banking-officer/${officerId}`,
           { withCredentials: true }
         );

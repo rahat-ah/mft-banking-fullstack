@@ -5,7 +5,7 @@ import { UserContext } from "../contextApi/userContext";
 
 function CustomerSearchBar() {
   const [lastSearchDetails, setLastSearchDetails] = useState(null);
-  const { customerDataBySearch,setCustomerDataBySearch } = useContext(UserContext);
+  const { customerDataBySearch,setCustomerDataBySearch,backendUrl } = useContext(UserContext);
   const {
     handleBlur,
     handleSubmit,
@@ -27,7 +27,7 @@ function CustomerSearchBar() {
   const customHandleSearch = async (values) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/search-customers`,
+        `${backendUrl}/user/search-customers`,
         {
           wordSearch: values.wordSearch,
           dateSearch: values.dateSearch,

@@ -10,12 +10,14 @@ const UserProvider = ({ children }) => {
   const [customerDataBySearch , setCustomerDataBySearch] = useState(null);
   const [isAuthenticated,setIsAuthenticated] = useState(false);
 
+  const backendUrl ='https://mft-banking-fullstack.onrender.com';
+
 
   // getting all customers from backend
 
   const getAllCustomers = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/all-customers`,{withCredentials:true});
+      const response = await axios.get(`${backendUrl}/user/all-customers`,{withCredentials:true});
       if(!response.data.success){
         throw new Error("Failed to fetch customers");
       }
@@ -33,7 +35,8 @@ const UserProvider = ({ children }) => {
     loginFormOpen,setLoginFormOpen,
     getAllCustomers,
     customerDataBySearch,setCustomerDataBySearch,
-    isAuthenticated,setIsAuthenticated
+    isAuthenticated,setIsAuthenticated,
+    backendUrl
   }
   
   return (

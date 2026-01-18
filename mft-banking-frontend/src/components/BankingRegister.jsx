@@ -15,6 +15,7 @@ export default function BankingRegister() {
   const [showVerifyButton, setShowVerifyButton] = useState(false);
   const [verifyingEmail, setVerifyingEmail] = useState(false);
   const [showOtpPopup,setShowOtpPopup] = useState(false)
+  const {backendUrl} = useContext(UserContext)
 
   useEffect(()=>{
     setLoginFormOpen(true)
@@ -35,7 +36,7 @@ export default function BankingRegister() {
     onSubmit: async(values) => {
       
       try {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`,values,{
+        const response = await axios.post(`${backendUrl}/auth/signup`,values,{
           withCredentials:true
         })
 
@@ -70,7 +71,7 @@ export default function BankingRegister() {
     }
     setVerifyingEmail(true)
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/send-verify-otp`,{email});
+      const response = await axios.post(`${backendUrl}/auth/send-verify-otp`,{email});
       
       if (!response.data.success) {
         toast.error(response.data.message)

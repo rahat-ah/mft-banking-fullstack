@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import formatTime from "../utils/countdownTimeFormater";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 export default function VerifyOtpPopup({ email, onClose , setIsEmailVerified }) {
   const [otp, setOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(180); // 3 minutes in seconds
   const [verifying, setVerifying] = useState(false);
+  const {backedUrl} = useContext(UserContext);
 
   // Countdown timer
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function VerifyOtpPopup({ email, onClose , setIsEmailVerified }) 
     }
     setVerifying(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/verify-otp`,{email,givenOtp:otp});
+      const response = await axios.post(`${backedUrl}/auth/verify-otp`,{email,givenOtp:otp});
       
       if(!response.data.success){
         setIsEmailVerified(false);

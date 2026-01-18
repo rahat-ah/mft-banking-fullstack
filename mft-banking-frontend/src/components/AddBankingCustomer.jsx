@@ -15,10 +15,13 @@ import { toast } from "react-toastify";
 import { validationSchema } from "../schemas/validationSchema";
 import { uploadImage } from "../utils/cloudinary-image";
 import SubmitLoder from "../utils/SubmitLoder";
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 export default function AddBankingCustomer() {
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
+  const {backendUrl} = useContext(UserContext)
   const {
     handleChange,
     handleBlur,
@@ -61,7 +64,7 @@ export default function AddBankingCustomer() {
       const stampPaperUpload = await uploadImage(values.stampPaperPhotoUrl);
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/add-customer`,
+        `${backendUrl}/user/add-customer`,
         {...values,
           profilePhotoUrl: profileUpload?.secure_url || "",
           nidPhotoUrl: nidUpload?.secure_url || "",

@@ -4,18 +4,21 @@ import axios from "axios";
 import profilePicMaker from "../utils/profilePicMaker";
 import {StepForward } from "lucide-react";
 import {toast} from "react-toastify"
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 export default function BankingOfficerDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [officer, setOfficer] = useState({});
   const [loading, setLoading] = useState(true);
+  const {backendUrl} = useContext(UserContext)
 
   useEffect(() => {
     const fetchOfficer = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/auth/banking-officer/${id}`,
+          `${backendUrl}/auth/banking-officer/${id}`,
           { withCredentials: true }
         );
         if (res.data.success) {
@@ -36,7 +39,7 @@ export default function BankingOfficerDetails() {
 
     try {
       setLoading(true)
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`,{},{
+      const res = await axios.post(`${backendUrl}/auth/logout`,{},{
         withCredentials:true
       })
       toast.success(res.data.message)

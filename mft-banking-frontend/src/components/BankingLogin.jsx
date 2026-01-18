@@ -15,6 +15,7 @@ export default function LoginPage() {
   const {setIsAuth} = useContext(AuthContext)
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(false);
+  const {backendUrl} = useContext(UserContext)
 
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function LoginPage() {
     try {
       setLoading(true)
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/signin`,
+        `${backendUrl}/auth/signin`,
         {
           email: values.email,
           mobileNumber: values.mobile,
@@ -90,7 +91,7 @@ export default function LoginPage() {
     try {
       setLoading(true)
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/admin-signin`,
+        `${backendUrl}/auth/admin-signin`,
         {
           email: values.email,
           mobileNumber: values.mobile,

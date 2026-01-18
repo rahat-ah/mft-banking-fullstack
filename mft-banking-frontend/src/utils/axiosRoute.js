@@ -1,7 +1,11 @@
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
+
+const {backendUrl} = useContext(UserContext)
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: backendUrl,
   withCredentials: true,
 });
 

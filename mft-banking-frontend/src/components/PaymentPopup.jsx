@@ -4,6 +4,8 @@ import { paymentValidationSchema } from "../schemas/validationSchema";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SubmitLoder from "../utils/SubmitLoder";
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 function PaymentPopup({
   isOpen,
@@ -28,11 +30,12 @@ function PaymentPopup({
       validationSchema: paymentValidationSchema,
     });
   const [loding,setLoding] = useState(false)
+  const {backendUrl} = useContext(UserContext)
 
   const customHandleSubmit = async (values) => {
     try {
       setLoding(true)
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/add-payment`,{
+      const response = await axios.post(`${backendUrl}/user/add-payment`,{
         customerId:id,
         amount:values.paymentAmount,
         paymentDate:values.paymentDate

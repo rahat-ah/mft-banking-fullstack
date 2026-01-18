@@ -18,13 +18,16 @@ import {
 } from "../utils/getTotalAmount";
 import { toast } from "react-toastify";
 import SubmitLoder from "../utils/SubmitLoder";
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 export default function BankingCustomersDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [customerData, setCustomerData] = useState({});
   const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
-  const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false);
+  const {backendUrl} = useContext(UserContext)
 
   const handlePaymentSuccess = (updatedCustomer) => {
     setCustomerData(updatedCustomer);
@@ -34,7 +37,7 @@ export default function BankingCustomersDetails() {
     const fetchCustomerDetails = async () => {
       try {
         const response = await axios.get(
-          import.meta.env.VITE_BACKEND_URL + `/user/customer/${id}`,{
+          backendUrl + `/user/customer/${id}`,{
             withCredentials:true
           }
         );
@@ -60,7 +63,7 @@ export default function BankingCustomersDetails() {
     try {
       setLoading(true)
       const response = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/user/delete-customer/${id}`,{
+        `${backendUrl}/user/delete-customer/${id}`,{
           withCredentials:true
         }
       );

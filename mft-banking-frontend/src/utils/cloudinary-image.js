@@ -1,12 +1,15 @@
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 export const uploadImage = async (file) => {
   if (!file) {
     return null
   }
   try {
+    const {backendUrl}=useContext(UserContext);
     const signatureResponse = await axios.get(
-      import.meta.env.VITE_BACKEND_URL + "/user/cloudinary-signature"
+      backendUrl + "/user/cloudinary-signature"
     );
     const { timestamp, signature, apiKey, cloudName } =
       await signatureResponse.data;

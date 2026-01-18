@@ -3,153 +3,8 @@ import axios from "axios";
 import SubmitLoder from "../utils/SubmitLoder";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
-const dummyCustomers = [
-  {
-    _id: "1",
-    fullName: "Rahim Uddin",
-    fatherName: "Karim Uddin",
-    dueMonth: "Dec 2025",
-    dueAmount: 2500,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "2",
-    fullName: "Salma Begum",
-    fatherName: "Abdul Jalil",
-    dueMonth: "Dec 2025",
-    dueAmount: 0,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "3",
-    fullName: "Hasan Ali",
-    fatherName: "Noor Ali",
-    dueMonth: "Dec 2025",
-    dueAmount: 1800,
-    status: "OnDate",
-    comments: "12",
-  },
-  {
-    _id: "4",
-    fullName: "Jahid Hossain",
-    fatherName: "Bashir Hossain",
-    dueMonth: "Dec 2025",
-    dueAmount: 3200,
-    status: "Non-Recovery",
-    comments: "12gfhthrturtrthrfh",
-  },
-  {
-    _id: "1ywe",
-    fullName: "Rahim Uddin",
-    fatherName: "Karim Uddin",
-    dueMonth: "Dec 2025",
-    dueAmount: 2500,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "2ywyr",
-    fullName: "Salma Begum",
-    fatherName: "Abdul Jalil",
-    dueMonth: "Dec 2025",
-    dueAmount: 0,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "3wtret4",
-    fullName: "Hasan Ali",
-    fatherName: "Noor Ali",
-    dueMonth: "Dec 2025",
-    dueAmount: 1800,
-    status: "OnDate",
-    comments: "12",
-  },
-  {
-    _id: "4tuio",
-    fullName: "Jahid Hossain",
-    fatherName: "Bashir Hossain",
-    dueMonth: "Dec 2025",
-    dueAmount: 3200,
-    status: "Non-Recovery",
-    comments: "12gfhthrturtrthrfh",
-  },
-  {
-    _id: "rtyu1",
-    fullName: "Rahim Uddin",
-    fatherName: "Karim Uddin",
-    dueMonth: "Dec 2025",
-    dueAmount: 2500,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "rtyu2",
-    fullName: "Salma Begum",
-    fatherName: "Abdul Jalil",
-    dueMonth: "Dec 2025",
-    dueAmount: 0,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "rtyu3",
-    fullName: "Hasan Ali",
-    fatherName: "Noor Ali",
-    dueMonth: "Dec 2025",
-    dueAmount: 1800,
-    status: "OnDate",
-    comments: "12",
-  },
-  {
-    _id: "truytyu4",
-    fullName: "Jahid Hossain",
-    fatherName: "Bashir Hossain",
-    dueMonth: "Dec 2025",
-    dueAmount: 3200,
-    status: "Non-Recovery",
-    comments: "12gfhthrturtrthrfh",
-  },
-  {
-    _id: "1gfh",
-    fullName: "Rahim Uddin",
-    fatherName: "Karim Uddin",
-    dueMonth: "Dec 2025",
-    dueAmount: 2500,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "2hre5",
-    fullName: "Salma Begum",
-    fatherName: "Abdul Jalil",
-    dueMonth: "Dec 2025",
-    dueAmount: 0,
-    status: "Paid",
-    comments: "12",
-  },
-  {
-    _id: "3hy6i7",
-    fullName: "Hasan Ali",
-    fatherName: "Noor Ali",
-    dueMonth: "Dec 2025",
-    dueAmount: 1800,
-    status: "OnDate",
-    comments: "12",
-  },
-  {
-    _id: "4gfu65",
-    fullName: "Jahid Hossain",
-    fatherName: "Bashir Hossain",
-    dueMonth: "Dec 2025",
-    dueAmount: 3200,
-    status: "Non-Recovery",
-    comments: "12gfhthrturtrthrfh",
-  },
-];
+import { useContext } from "react";
+import { UserContext } from "../contextApi/userContext";
 
 const statusStyle = {
   paid: {
@@ -190,6 +45,7 @@ export default function BankingSearchReport() {
   const [activeSection, setActiveSection] = useState("ALL");
   const [notes, setNotes] = useState({});
   const [activeNoteId, setActiveNoteId] = useState(null);
+  const {backendUrl} = useContext(UserContext)
 
 
   const navigate = useNavigate();
@@ -200,7 +56,7 @@ export default function BankingSearchReport() {
         setLoding(true);
         const res = await axios.get(
           `${
-            import.meta.env.VITE_BACKEND_URL
+            backendUrl
           }/user/get-total-previous-month-due`,
           {
             withCredentials: true,
@@ -237,7 +93,7 @@ export default function BankingSearchReport() {
     
     try {
       setLoding(true)
-      const res =await axios.put(`${import.meta.env.VITE_BACKEND_URL}/user/add-due-comment/${id}`,{comment:note},{withCredentials:true});
+      const res =await axios.put(`${backendUrl}/user/add-due-comment/${id}`,{comment:note},{withCredentials:true});
 
       console.log(res)
       if (res.data.success) {
